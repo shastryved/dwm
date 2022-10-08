@@ -16,6 +16,5 @@ restartsig-20180523-6.2
 xresources-20210827-138b405
 rebootcmd-20220202-d39e2f3
 shutdowncmd-20220202-d39e2f3
-
 dwm-namedscratchpads-6.2.diff
 dwm-swallow-6.3.diff
