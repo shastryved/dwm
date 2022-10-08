@@ -1,15 +1,18 @@
 /* See LICENSE file for copyright and license details. */
 
 #define SESSION_FILE "/tmp/dwm-session"
+#define TERMINAL "st"
+#define TERMCLASS "St"
 
 /* appearance */
 static unsigned int borderpx  = 2;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 5;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -82,6 +85,7 @@ static const Layout layouts[] = {
 	{ NULL,       NULL },
 };
 
+#include <X11/XF86keysym.h> /* for function key bindings */
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
@@ -120,6 +124,8 @@ ResourcePref resources[] = {
 		{ "resizehints",       	INTEGER, &resizehints },
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
+
+static const char *stscratch[] = {"s", "st", "-t", "scratchpad", NULL};
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -163,6 +169,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY|ShiftMask,                       XK_Return,  togglescratch,  {.v = stscratch } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -171,7 +178,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_a,      togglealttag,   {0} },
 	{ MODKEY,                       XK_n,      nametag,   {0} },
-	{ MODKEY|ControlMask,                       XK_u,      swalstopsel,    {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -181,22 +187,16 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      killclient,           {0} },
-	{ MODKEY,             XK_x,      quit,           {0} },
+	{ MODKEY,             XK_q,      killclient,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ControlMask|ShiftMask,             XK_q,      quit,           {1} },
 	{ MODKEY|ShiftMask,             XK_Delete, spawn,          {.v = rebootcmd} },
 	{ MODKEY|ShiftMask,             XK_Escape, spawn,          {.v = shutdowncmd} },
-    { MODKEY,                       XK_s, scratchpad_show, {.i = 1} },
-    { MODKEY,                       XK_y, scratchpad_show, {.i = 2} },
-    { MODKEY,                       XK_u, scratchpad_show, {.i = 3} },
-    { MODKEY|ShiftMask,                       XK_s, scratchpad_hide, {.i = 1} },
-    { MODKEY|ShiftMask,                       XK_y, scratchpad_hide, {.i = 2} },
-    { MODKEY|ShiftMask,                       XK_u, scratchpad_hide, {.i = 3} },
-	{ MODKEY|ShiftMask,             XK_r,      scratchpad_remove,           {0} },
 	{ 0,                               	 XF86XK_AudioMute,		                  spawn,	  SHCMD("pamixer -t") }, /* mute */
 	{ 0,                               	 XF86XK_AudioRaiseVolume,              		  spawn,	  SHCMD("pamixer --allow-boost -i 3") }, /* vol up */
 	{ 0,                               	 XF86XK_AudioLowerVolume,              		  spawn,	  SHCMD("pamixer --allow-boost -d 3") }, /* vol down */
 	{ MODKEY,			         XK_w,		                             	  spawn,	  SHCMD("$BROWSER") }, /* browser */
+	{ MODKEY,			         XK_r,		                              	  spawn,	  SHCMD(TERMINAL " -e ranger") }, /* ranger */
 };
 
 /* button definitions */
