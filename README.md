@@ -31,7 +31,7 @@ Patches in this build are stored in /patch. They can be looked up on https://dwm
 
 manual fixes applied:
 1. [systray/barpadding compatibility][1]
-	 patch summarised below -
+	 patch (apply changes inside the `updatesystray` function)-
 	```
 	- XMoveResizeWindow(dpy, systray->win, x, m->by , w, bh);
 	- wc.x = x ; wc.y = m->by ; wc.width = w; wc.height = bh;`
@@ -61,5 +61,4 @@ Add the following line to your .xinitrc to start dwm using startx:
     exec dwm
 ```
 
-## Links
 [1]: https://www.reddit.com/r/suckless/comments/sgdpqz/comment/i6hb2ce/?utm_source=share&utm_medium=web2x&context=3
