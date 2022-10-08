@@ -1,0 +1,21 @@
+* dwm patches (bottom->top applied first->last)
+
+cfacts-vanitygaps-6.2_combo
+systray-6.3
+nametag-prepend-6.2
+alternativetags-6.3
+movestack-20211115-a786211
+cyclelayouts-20180524-6.2
+hide_vacant_tags-6.3
+pertag-20200914-61bb8b2
+autostart-20210120-cb3f58a
+barpadding-20211020-a786211
+actualfullscreen-20211013-cb3f58a
+restoreafterrestart-20220709-d3f93c7
+restartsig-20180523-6.2
+xresources-20210827-138b405
+rebootcmd-20220202-d39e2f3
+shutdowncmd-20220202-d39e2f3
+
+dwm-namedscratchpads-6.2.diff
+dwm-swallow-6.3.diff
