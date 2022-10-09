@@ -28,6 +28,7 @@ Patches in this build are stored in /patch. They can be looked up on https://dwm
 - shutdowncmd-20220202-d39e2f3: shutdown the system `super + shift + escape`
 - namedscratchpads-6.2: multiple scratchpads on their respective keys
 - swallow-6.3: swallow floating windows that spawn from a terminal (i.e. hide parent process)
+- dwm-bar-height-spacing-6.3: set bar height in config.def.h under user_bh
 
 manual fixes applied:
 1. [systray/barpadding compatibility][1]
