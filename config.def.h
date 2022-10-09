@@ -5,8 +5,8 @@
 #define TERMCLASS "St"
 
 /* appearance */
-static unsigned int borderpx  = 2;        /* border pixel of windows */
-static unsigned int snap      = 32;       /* snap pixel */
+static unsigned int borderpx  = 3;        /* border pixel of windows */
+static unsigned int snap      = 28;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 5;   /* systray spacing */
@@ -23,7 +23,8 @@ static int topbar             = 1;        /* 0 means bottom bar */
 static const int vertpad            = 10;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
 static char font[]            = "monospace:size=10";
-static const char *fonts[]          = { "monospace:size=10" };
+// static const char *fonts[]          = { "monospace:size=10", "ttf-font-awesome:size=l6" };
+static const char *fonts[]          = { "monospace:size=10", "FontAwesome5Brands:size=9:antialias:true", "FontAwesome5Free:size=9:antialias:true", "FontAwesome5Free:style=Solid:size=9:antialias:true"};
 static char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]       = "#292929";
 static char normbordercolor[]       = "#454545";
@@ -42,7 +43,7 @@ static char *colors[][3]      = {
 /* #define TAG_PREPEND "%1i "		 formatted as 2 chars */
 #define TAG_PREPEND ""		/* formatted as 2 chars */
 #define MAX_TAGLEN 16			/* altogether */
-static char tags[][MAX_TAGLEN] = { "d", "x", "w", "f", "c", "6", "7", "8", "9" };
+static char tags[][MAX_TAGLEN] = { "", "", "", "", "5", "6", "7", "8", "9" };
 static const char *tagsalt[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const int momentaryalttags = 1; /* 1 means alttags will show only when key is held down*/
 
@@ -54,7 +55,8 @@ static const Rule rules[] = {
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor		scratchkey*/
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1,			0},
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1,			0},
-	{ "st",      NULL,     NULL,           0,         0,          1,           0,        -1,			's'},
+	{ "st",      NULL,     NULL,           0,         1,          1,           0,        -1,			's'},
+	{ "KeePassXC",      NULL,     NULL,           0,         1,          0,           0,        -1,			0},
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1,			0}, /* xev */
 };
 
@@ -164,7 +166,8 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,                       XK_t,      setlayout,      {.v = &layouts[5]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY|ControlMask,                       XK_space,  setlayout,      {0} },
@@ -177,7 +180,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_a,      togglealttag,   {0} },
+	{ MODKEY,             XK_a,      togglealttag,   {0} },
 	{ MODKEY,                       XK_n,      nametag,   {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -196,8 +199,8 @@ static const Key keys[] = {
 	{ 0,                               	 XF86XK_AudioMute,		                  spawn,	  SHCMD("pamixer -t") }, /* mute */
 	{ 0,                               	 XF86XK_AudioRaiseVolume,              		  spawn,	  SHCMD("pamixer --allow-boost -i 3") }, /* vol up */
 	{ 0,                               	 XF86XK_AudioLowerVolume,              		  spawn,	  SHCMD("pamixer --allow-boost -d 3") }, /* vol down */
-	{ MODKEY,			         XK_w,		                             	  spawn,	  SHCMD("$BROWSER") }, /* browser */
-	{ MODKEY,			         XK_r,		                              	  spawn,	  SHCMD(TERMINAL " -e ranger") }, /* ranger */
+	{ MODKEY,			         XK_w,		                             	  spawn,	  SHCMD("$BROWSER") }, /* web browser */
+	{ MODKEY,			         XK_r,		                              	  spawn,	  SHCMD(TERMINAL " -e lf") }, /* file browser */
 };
 
 /* button definitions */
