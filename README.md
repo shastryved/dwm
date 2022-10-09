@@ -50,7 +50,7 @@ the /usr/local namespace by default).
 ```
 git clone https://github.com/shastryv/dwm
 cd dwm
-rm config.h && sudo make clean install
+sudo make clean install
 ```
 
 
