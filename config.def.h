@@ -20,7 +20,7 @@ static const unsigned int gappov    = 30;       /* vert outer gap between window
 static int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static const int user_bh            = 2;        /* 2 is the default spacing around the bar's font */
+static const int user_bh            = 6;        /* 2 is the default spacing around the bar's font */
 static const int vertpad            = 15;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
 static char font[]            = "monospace:size=10";
@@ -54,10 +54,11 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor		scratchkey*/
-	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1,			0},
+	{ "Gimp",    NULL,     NULL,           0,         1,          0,           -1,        -1,			0},
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1,			0},
 	{ "st",      NULL,     NULL,           0,         1,          1,           0,        -1,			's'},
-	{ "KeePassXC",      NULL,     NULL,           0,         1,          0,           0,        -1,			0},
+	{ "vim",      NULL,     NULL,           0,         1,          0,           0,        -1,			'v'},
+	{ "KeePassXC",      NULL,     NULL,           0,         1,          0,           0,        -1,			'k'},
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1,			0}, /* xev */
 };
 
@@ -129,7 +130,8 @@ ResourcePref resources[] = {
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
 
-static const char *stscratch[] = {"s", "st", "-t", "scratchpad", NULL};
+static const char *stscratch[] = {"s", "st", "-t", "terminal", NULL};
+static const char *kpscratch[] = {"k", "keepassxc", "-t", "pass", NULL};
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -174,7 +176,8 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
-	{ MODKEY|ShiftMask,                       XK_Return,  togglescratch,  {.v = stscratch } },
+	{ MODKEY,                       XK_s,  togglescratch,  {.v = stscratch } },
+	{ MODKEY,                       XK_p,  togglescratch,  {.v = kpscratch } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -202,6 +205,8 @@ static const Key keys[] = {
 	{ 0,                               	 XF86XK_AudioLowerVolume,              		  spawn,	  SHCMD("pamixer --allow-boost -d 3") }, /* vol down */
 	{ MODKEY,			         XK_w,		                             	  spawn,	  SHCMD("$BROWSER") }, /* web browser */
 	{ MODKEY,			         XK_r,		                              	  spawn,	  SHCMD(TERMINAL " -e lf") }, /* file browser */
+	{ MODKEY|ShiftMask,			         XK_r,		                              	  spawn,	  SHCMD(TERMINAL " -e ranger") }, /* file browser (ranger)*/
+	{ MODKEY,			         XK_v,		                              	  spawn,	  SHCMD(TERMINAL " -e vim") }, /* vim */
 };
 
 /* button definitions */
