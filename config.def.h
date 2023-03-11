@@ -12,7 +12,7 @@ static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corne
 static const unsigned int systrayspacing = 5;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
@@ -58,11 +58,11 @@ static const Rule rules[] = {
 	{ "Stata/MP 17.0",    NULL,     NULL,           0,         0,          0,           -1,        -1,			0},
 	{ "Data Editor (Browse)",    NULL,     NULL,           0,         0,          0,           -1,        -1,			0},
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1,			0},
-	{ "st",      NULL,     NULL,           0,         1,          1,           0,        -1,			's'},
+	{ "st",      NULL,     NULL,           0,         1,          0,           1,        -1,			's'},
 	{ "vim",      NULL,     NULL,           0,         1,          0,           0,        -1,			'v'},
 	{ "KeePassXC",      NULL,     NULL,           0,         1,          0,           0,        -1,			'k'},
 	{ "htop",      NULL,     NULL,           0,         1,          0,           0,        -1,			'z'},
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1,			0}, /* xev */
+	{ NULL,      NULL,     "Event Tester", 0,        	 0,          0,           1,        -1,			0}, /* xev */
 };
 
 /* layout(s) */
