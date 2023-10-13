@@ -25,7 +25,7 @@ static const int vertpad            = 5;       /* vertical padding of bar */
 static const int sidepad            = 15;       /* horizontal padding of bar */
 static char font[]            = "monospace:size=10";
 // static const char *fonts[]          = { "monospace:size=10", "ttf-font-awesome:size=16" };
-static const char *fonts[]          = { "monospace:size=10", "ttf-font-awesome:size=16:antialias:true", "FontAwesome5Brands:size=16:antialias:true", "FontAwesome5Free:size=16:antialias:true", "FontAwesome5Free:style=Solid:size=16:antialias:true"};
+static const char *fonts[]          = { "monospace:size=10", "ttf-font-awesome:size=10:antialias:true", "FontAwesome5Brands:size=8:antialias:true", "FontAwesome5Free:size=8:antialias:true", "FontAwesome5Free:style=Solid:size=8:antialias:true"};
 static char dmenufont[]       = "monospace:size=12";
 static char normbgcolor[]       = "#292929";
 static char normbordercolor[]       = "#292929";
@@ -209,7 +209,7 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume,      		spawn,	  SHCMD("pamixer --allow-boost -i 3") }, /* vol up */
 	{ 0,                            XF86XK_AudioLowerVolume,      		spawn,	  SHCMD("pamixer --allow-boost -d 3") }, /* vol down */
 	{ MODKEY,			         					XK_w,		                          spawn,	  SHCMD("$BROWSER") }, /* web browser */
-	{ MODKEY,			         					XK_r,		                          spawn,	  SHCMD(TERMINAL " -e lf") }, /* file browser */
+	{ MODKEY,			         					XK_r,		                          spawn,	  SHCMD(TERMINAL " -e vifm") }, /* file browser */
 	{ MODKEY|ShiftMask,			        XK_r,		                          spawn,	  SHCMD(TERMINAL " -e ranger") }, /* file browser (ranger)*/
 	{ MODKEY,			         					XK_e,		                          spawn,	  SHCMD(TERMINAL " -e emacs -nw --no-splash") }, /* emacs */
 	{ MODKEY,			         					XK_v,		                          spawn,	  SHCMD(TERMINAL " -e vim") }, /* vim */
