@@ -208,7 +208,8 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioMute,		              spawn,	  SHCMD("pamixer -t") }, /* mute */
 	{ 0,                            XF86XK_AudioRaiseVolume,      		spawn,	  SHCMD("pamixer --allow-boost -i 3") }, /* vol up */
 	{ 0,                            XF86XK_AudioLowerVolume,      		spawn,	  SHCMD("pamixer --allow-boost -d 3") }, /* vol down */
-	{ MODKEY,			         					XK_w,		                          spawn,	  SHCMD("$BROWSER") }, /* web browser */
+	{ MODKEY,			         					XK_w,		                          spawn,	  SHCMD("$BROWSER") }, /* default web browser */
+	{ MODKEY,			         					XK_c,		                          spawn,	  SHCMD("google-chrome-stable") }, /* chrome */
 	{ MODKEY,			         					XK_r,		                          spawn,	  SHCMD(TERMINAL " -e vifm") }, /* file browser */
 	{ MODKEY|ShiftMask,			        XK_r,		                          spawn,	  SHCMD(TERMINAL " -e ranger") }, /* file browser (ranger)*/
 	{ MODKEY,			         					XK_e,		                          spawn,	  SHCMD(TERMINAL " -e emacs -nw --no-splash") }, /* emacs */
