@@ -111,6 +111,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *rebootcmd[]  = { "sudo", "shutdown", "-r", "+0", NULL };
 static const char *shutdowncmd[]  = { "sudo", "shutdown", "+0", NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *brightnessup[] = {"xbacklight", "-inc", "5", NULL} ;
+static const char *brightnessdown[] = {"xbacklight", "-dec", "5", NULL} ;
 
 /*
  * Xresources preferences to load at startup
@@ -205,12 +207,18 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
 	{ MODKEY|ShiftMask,             XK_Delete, spawn,          {.v = rebootcmd} },
 	{ MODKEY|ShiftMask,             XK_Escape, spawn,          {.v = shutdowncmd} },
-	{ 0,                            XF86XK_AudioMute,		              spawn,	  SHCMD("pamixer -t") }, /* mute */
-	{ 0,                            XF86XK_AudioRaiseVolume,      		spawn,	  SHCMD("pamixer --allow-boost -i 3") }, /* vol up */
-	{ 0,                            XF86XK_AudioLowerVolume,      		spawn,	  SHCMD("pamixer --allow-boost -d 3") }, /* vol down */
+	/* commented out pulseaudio vol change functions for pipewire */
+	// { 0,                            XF86XK_AudioMute,		              spawn,	  SHCMD("pamixer -t") }, /* mute */
+	// { 0,                            XF86XK_AudioRaiseVolume,      		spawn,	  SHCMD("pamixer --allow-boost -i 3") }, /* vol up */
+	// { 0,                            XF86XK_AudioLowerVolume,      		spawn,	  SHCMD("pamixer --allow-boost -d 3") }, /* vol down */
+	{ 0,                            XF86XK_AudioMute,		              spawn,	  SHCMD("amixer -q sset Master toggle") }, /* mute */
+	{ 0,                            XF86XK_AudioRaiseVolume,      		spawn,	  SHCMD("amixer -q sset Master 3%+") }, /* vol up */
+	{ 0,                            XF86XK_AudioLowerVolume,      		spawn,	  SHCMD("amixer -q sset Master 3%-") }, /* vol down */
+	{ 0,       						XF86XK_MonBrightnessUp, 			spawn,    { .v = brightnessup } },
+	{ 0,       						XF86XK_MonBrightnessDown, 			spawn, { .v = brightnessdown } },
 	{ MODKEY,			         					XK_w,		                          spawn,	  SHCMD("$BROWSER") }, /* default web browser */
 	{ MODKEY,			         					XK_c,		                          spawn,	  SHCMD("google-chrome-stable") }, /* chrome */
-	{ MODKEY,			         					XK_r,		                          spawn,	  SHCMD(TERMINAL " -e vifm") }, /* file browser */
+	// { MODKEY,			         					XK_r,		                          spawn,	  SHCMD(TERMINAL " -e vifm") }, /* file browser */
 	{ MODKEY|ShiftMask,			        XK_r,		                          spawn,	  SHCMD(TERMINAL " -e ranger") }, /* file browser (ranger)*/
 	{ MODKEY,			         					XK_e,		                          spawn,	  SHCMD(TERMINAL " -e emacs -nw --no-splash") }, /* emacs */
 	{ MODKEY,			         					XK_v,		                          spawn,	  SHCMD(TERMINAL " -e vim") }, /* vim */
